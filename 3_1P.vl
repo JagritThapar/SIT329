@@ -1,0 +1,35 @@
+`timescale 1ns/1ns
+
+module halfadder
+	(
+		input a,
+		input b,
+		output sum,
+		output cout
+	);
+
+  xor(sum, a, b);
+  and(cout, a, b);  
+
+endmodule 
+
+`timescale 1ns/1ns
+
+module fulladder(sum, cout, a, b, cin);
+	
+	input a,b,cin;
+	output sum, cout;
+
+	assign sum = a^b^cin; 
+	assign cout = a&&b || a&&cin || b&&cin;
+
+endmodule 
+
+module threebit(output sum0, sum1, sum2, cout, input a0, a1, a2, b0, b1, b2);
+  
+  wire w1,w2;
+  halfadder ha(a0,b0,sum0, w1);
+  fulladder fa_1(sum1,w2,a1,b1,w1); 
+  fulladder fa_2(sum2,cout,a2,b2,w2);
+
+endmodule 
