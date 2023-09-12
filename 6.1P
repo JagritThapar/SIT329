@@ -1,13 +1,16 @@
-module light_sys
-(mode,
- complement,
- click, 
- clk,
- rst);
+module light_sys (
+  input clk,
+  input rst,
+  input click,
+  output reg [2:0] mode,
+  output reg [2:0] complement
+);
+
  
 parameter HG_FR=2'b11, HY_FR = 2'b10, HR_FG=2'b01,HR_FY=2'b00; //states of the FSM 
-clk, // 50,000,000hz clock
-rst;
+assign clk_enable = cnt == 3 ? 1 : 0; // 50,000,000 for 50MHz running on FPGA
+reg [3:0] cnt_delay = 0; // Adjust the bit width as needed
+
 
 output reg [2:0] mode, complement; //output of traffic lights
 
