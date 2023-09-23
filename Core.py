@@ -23,5 +23,5 @@ data = {
 }
 
 # Store the JSON object in a file
-with open("/path/to/file/obd_data.json", "w") as f:
+with open("file/obd_data.json", "w") as f:
     json.dump(data, f)
