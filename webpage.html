@@ -1,0 +1,107 @@
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>OBD Data</title>
+
+	<!-- INCLUDING JQUERY-->
+	<script src=
+"https://code.jquery.com/jquery-3.5.1.js">
+	</script>
+
+	<!-- CSS FOR STYLING THE PAGE -->
+	<style>
+		table {
+			margin: 0 auto;
+			font-size: large;
+			border: 1px solid black;
+		}
+
+		h1 {
+			text-align: center;
+			color: #006600;
+			font-size: xx-large;
+			font-family: 'Gill Sans',
+				'Gill Sans MT', ' Calibri',
+				'Trebuchet MS', 'sans-serif';
+		}
+
+		td {
+			background-color: #E4F5D4;
+			border: 1px solid black;
+		}
+
+		th,
+		td {
+			font-weight: bold;
+			border: 1px solid black;
+			padding: 10px;
+			text-align: center;
+		}
+
+		td {
+			font-weight: lighter;
+		}
+	</style>
+</head>
+
+<body>
+	<section>
+		<h1>OBD Data</h1>
+
+		<!-- TABLE CONSTRUCTION-->
+		<table id='table'>
+			<!-- HEADING FORMATION -->
+			<tr>
+				<th>Fuel Consumption</th>
+				<th>Transmition Temperature</th>
+				<th>Coolant Level</th>
+				<th>Brake fluid level</th>
+                                <th>Oil Pressure</th>
+                                <th>Battery Voltage</th>
+			</tr>
+
+			<script>
+				$(document).ready(function () {
+
+					// FETCHING DATA FROM JSON FILE
+					$.getJSON("obd/data/obddata.json",
+							function (data) {
+						var car = '';
+
+						// ITERATING THROUGH OBJECTS
+						$.each(data, function (key, value) {
+
+							//CONSTRUCTION OF ROWS HAVING
+							// DATA FROM JSON OBJECT
+							car += '<tr>';
+							car += '<td>' +
+								value.fuel_consumption + '</td>';
+
+							car += '<td>' +
+								value.transmission_temperature + '</td>';
+
+							car += '<td>' +
+								value.coolant_level + '</td>';
+
+							car += '<td>' +
+								value.brake_fluid_level + '</td>';
+                                                        
+                                                        car += '<td>' +
+								value.oil_pressure + '</td>';
+ 
+                                                        car += '<td>' +
+								value.battery_voltage + '</td>';
+
+							car += '</tr>';
+						});
+						
+						//INSERTING ROWS INTO TABLE
+						$('#table').append(car);
+					});
+				});
+			</script>
+	</section>
+</body>
+
+</html>
